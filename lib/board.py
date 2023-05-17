@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 # Pieces
-pieces = ('R','N','B','K','Q','B','N','R','P')
+pieces = ('R','N','B','K','Q','B','N','R','P','P','P','P','P','P','P','P')
 
 class Board:
     # drawing the baord
@@ -29,10 +29,7 @@ class Piece:
     # return how many pieces in one set
     @property
     def count(self) -> int:
-        total = 0
-        for i in self._pieces:
-            total += 1 
-        return f"total of pieces remaining {total}"
+        return len(self._pieces)
 
    
 class InitialState:
@@ -42,45 +39,40 @@ class InitialState:
         pieces = Piece().pieces
         count = Piece().count
         state = board.state 
-        counting = len(pieces) - 1
-        state.loc[1] = [pieces[i] for i in range(counting)] 
-        state.loc[8] = [pieces[i] for i in range(counting)] 
-        state.loc[2] = [pieces[-1] for i in range(counting)] 
-        state.loc[7] = [pieces[-1] for i in range(counting)]
-        
+        state.loc[1] = [pieces[i] for i in range(8)] 
+        state.loc[8] = [pieces[i] for i in range(8)] 
+        state.loc[2] = [pieces[-1] for i in range(8)] 
+        state.loc[7] = [pieces[-1] for i in range(8)]
         return state, count
 
 
 class PieceMovement:
-    
-    pass
+    def move(self,initrow,initcol, row, col, board: Board, piece):
+        state = board.state
+        # Rook
+        if piece == 'R':
+            if initrow == row or initcol == col:
+                state.loc[row,col] = piece 
+                return state.loc[row,col] 
+        # Knight
+        if piece == 'N':
+            pass
 
+        # Bishop
+        if piece == 'B':
+            pass
 
-class Player:
-    def __init__(self):
-        self.score: int = 0
+        # Queen
+        if piece == 'Q':
+            pass
 
+        # King
+        if piece == 'K':
+            pass
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        # Pawn
+        if piece == 'P':
+            pass
 
 
 
@@ -93,24 +85,4 @@ class Player:
 
 
 
-
-
-
-
-    # def draw(self):
-    #     df = np.full((self._cols,self._rows),'.').astype(str)
-    #     self._board = pd.DataFrame(df, index = [1,2,3,4,5,6,7,8], columns=['a','b','c','d','e','f','g','h'] )
-
-    #     # setting _pieces rows by label locations
-    #     self._board.loc[1] = [self._pieces[i] for i in range(len(self._pieces)-1)] 
-    #     self._board.loc[8] = [self._pieces[i] for i in range(len(self._pieces)-1)] 
-    #     self._board.loc[2] = [self._pieces[-1] for i in range(len(self._pieces)-1)] 
-    #     self._board.loc[7] = [self._pieces[-1] for i in range(len(self._pieces)-1)]
-    #     return self._board
-
-
-    # def move(self, piece, row, col):
-    #     if piece in self._pieces:
-    #         self._board.loc[row,col] = '.' 
-    #         return self._board
 

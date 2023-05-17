@@ -1,17 +1,14 @@
 import numpy as np 
 import pandas as pd 
-from lib.board import Board , InitialState
-
+from lib.board import Board, InitialState, PieceMovement
 
 board = Board()
-setpieces = InitialState()
-
+intialstate = InitialState()
+movement = PieceMovement()
 def main():
-    set, count = setpieces.setpieces(board)
-    print(set)
-    print(count)
-
-
+    set, count = intialstate.setpieces(board)
+    movement.move(8, 'h', 5, 'h', board, 'R')
+    print(board.state)
 if __name__ == '__main__':
     main()
 
